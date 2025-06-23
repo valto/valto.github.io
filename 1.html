@@ -5,109 +5,513 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Private AI Workshops with Valto Loikkanen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
-        .container {
-            width: 80%;
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
-            background: white;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
         }
+
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 60px 20px;
-            background: #222;
-            color: white;
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
         }
-        .hero img {
-            width: 150px;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff05" points="0,1000 1000,800 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             border-radius: 50%;
+            animation-delay: -2s;
         }
+
+        .shape:nth-child(2) {
+            top: 70%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #4834d4, #686de0);
+            border-radius: 20px;
+            animation-delay: -8s;
+        }
+
+        .shape:nth-child(3) {
+            top: 30%;
+            right: 30%;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00d2d3, #54a0ff);
+            border-radius: 50%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(20px) rotate(240deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
         .hero h1 {
-            margin: 20px 0 10px;
-            font-size: 2.5em;
-        }
-        .hero p {
-            font-size: 18px;
-        }
-        .cta {
-            background: #ff9900;
-            padding: 15px 30px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
             color: white;
-            text-decoration: none;
-            font-size: 20px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .cta-primary {
             display: inline-block;
-            margin-top: 20px;
-        }
-        .section {
-            padding: 30px;
-        }
-        .section h2 {
-            color: #0073e6;
-        }
-        .icon {
-            font-size: 24px;
-            color: #0073e6;
-            margin-right: 10px;
-        }
-        .cta-section {
-            text-align: center;
-            padding: 40px;
-            background: #0073e6;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
-        }
-        .cta-section a {
-            background: #ff9900;
-            color: white;
-            padding: 15px 30px;
+            padding: 18px 40px;
             text-decoration: none;
-            font-size: 20px;
-            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-primary:hover::before {
+            left: 100%;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .container {
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .workshop-content {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            padding: 80px 20px;
+        }
+
+        .content-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .content-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .content-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-item h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-item .icon {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .about-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            color: white;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff20"/></svg>') repeat;
+            animation: drift 30s infinite linear;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            background: white;
+            color: #ee5a24;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 60px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="hero">
-        <img src="https://valtoai.com/images/Valto-profile-casual.png" alt="Valto Loikkanen">
-        <h1>Private AI Workshops</h1>
-        <p>Unlock AI for Your Organization with Hands-on, Custom Workshops</p>
-        <a href="#contact" class="cta">Let’s Organize a Workshop</a>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="profile-container">
+                <img src="https://valtoai.com/images/Valto-profile-casual.png" alt="Valto Loikkanen" class="profile-image">
+            </div>
+            <h1>Private AI Workshops</h1>
+            <p class="hero-subtitle">Unlock AI for Your Organization with Hands-on, Custom Workshops</p>
+            <a href="#contact" class="cta-primary">Let's Organize a Workshop</a>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </div>
 
     <div class="container">
         <div class="section">
-            <h2><i class="fa-solid fa-lightbulb icon"></i> Why This AI Workshop?</h2>
-            <p>Not a generic seminar – a hands-on, private workshop designed to fit your industry, goals, and challenges.</p>
+            <h2 class="section-title">Why Choose This AI Workshop?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Tailored to Your Industry</h3>
+                    <p>Not a generic seminar – a hands-on, private workshop designed specifically for your industry, goals, and unique challenges.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Expert-Led Experience</h3>
+                    <p>Learn from 25+ years of entrepreneurial experience and cutting-edge AI implementation strategies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Immediate Implementation</h3>
+                    <p>Walk away with actionable strategies and a clear roadmap for integrating AI into your business operations.</p>
+                </div>
+            </div>
         </div>
+    </div>
 
+    <div class="workshop-content">
         <div class="section">
-            <h2><i class="fa-solid fa-gears icon"></i> What’s Covered?</h2>
-            <ul>
-                <li><strong>AI Market Overview</strong> – Trends, key technologies, and impact on different sectors.</li>
-                <li><strong>AI Strategy for Your Business</strong> – Discover how AI can enhance decision-making and efficiency.</li>
-                <li><strong>Live AI Experience</strong> – Build and interact with AI Twins or Talking Product AI.</li>
-                <li><strong>Implementation Roadmap</strong> – Plan how to integrate AI effectively in your business.</li>
-            </ul>
+            <h2 class="section-title">What's Covered in the Workshop?</h2>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h4><i class="fas fa-chart-line icon"></i>AI Market Overview</h4>
+                    <p>Current trends, key technologies, and AI's transformative impact across different industry sectors.</p>
+                </div>
+                
+                <div class="content-item">
+                    <h4><i class="fas fa-chess icon"></i>AI Strategy for Your Business</h4>
+                    <p>Discover how AI can enhance decision-making, improve efficiency, and drive competitive advantage.</p>
+                </div>
+                
+                <div class="content-item">
+                    <h4><i class="fas fa-code icon"></i>Live AI Experience</h4>
+                    <p>Build and interact with AI Twins or Talking Product AI in real-time during the workshop.</p>
+                </div>
+                
+                <div class="content-item">
+                    <h4><i class="fas fa-road icon"></i>Implementation Roadmap</h4>
+                    <p>Develop a comprehensive plan for effectively integrating AI solutions in your business.</p>
+                </div>
+            </div>
         </div>
+    </div>
 
+    <div class="about-section">
         <div class="section">
-            <h2><i class="fa-solid fa-user-tie icon"></i> About Valto Loikkanen</h2>
-            <p>Internationally awarded entrepreneur and AI strategist with 25+ years of experience. Co-founder of Prifina & Digiole, pioneering AI adoption for businesses.</p>
+            <div class="about-content">
+                <h2 class="section-title">About Valto Loikkanen</h2>
+                <p>Internationally awarded entrepreneur and AI strategist with 25+ years of experience in technology innovation. Co-founder of Prifina & Digiole, pioneering AI adoption strategies that transform how businesses operate and compete in the digital age.</p>
+            </div>
         </div>
     </div>
 
     <div class="cta-section" id="contact">
-        <h2>Ready to Transform Your Business with AI?</h2>
-        <p>Let’s tailor an AI workshop for your company.</p>
-        <a href="https://hey.speak-to.ai/valto">Chat with My AI Twin</a>
+        <div class="cta-content">
+            <h2>Ready to Transform Your Business with AI?</h2>
+            <p>Let's tailor an AI workshop specifically for your company's needs and goals.</p>
+            <a href="https://hey.speak-to.ai/valto" class="cta-secondary">Chat with My AI Twin</a>
+        </div>
     </div>
 </body>
 </html>
